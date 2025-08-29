@@ -1,0 +1,25 @@
+class Solution {
+    static int count = 0;
+    static int ans = -1;
+
+    public int KthSmallestElement(Node root, int K) {
+        count = 0;
+        ans = -1;
+        inorder(root, K);
+        return ans;
+    }
+
+    private void inorder(Node root, int K) {
+        if (root == null) return;
+
+        inorder(root.left, K);
+
+        count++;
+        if (count == K) {
+            ans = root.data;
+            return; // found kth element
+        }
+
+        inorder(root.right, K);
+    }
+}
