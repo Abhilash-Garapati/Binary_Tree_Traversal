@@ -1,0 +1,25 @@
+class Solution 
+{
+    // Function to return maximum path sum from any node in a tree.
+    int findMaxSum(Node node) 
+    {
+        // your code goes here
+          int sum[] = new int [1];
+          int res[] = new int [1]; 
+          res[0] = Integer.MIN_VALUE;
+          traverse(node,sum,res);
+          return res[0];
+    }
+    int traverse(Node root,int sum [],int res [])
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        int left = Math.max(0,traverse(root.left,sum,res));
+        int right = Math.max(0,traverse(root.right,sum,res));
+        sum[0] = root.data + left + right;
+        res[0] = Math.max(res[0],sum[0]);
+        return root.data + Math.max(left,right);
+    }
+}
